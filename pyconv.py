@@ -243,7 +243,11 @@ class PyConv(object):
             return False        
         while 1:
             debug(import_task = import_task)
-            if import_task:
+            if import_task.get('status') == 'error':
+                self.bar.update(100, task = task, subtask = make_colors("[" + import_task.get("code") + "]", 'lw', 'r') + " ")                
+                print(make_colors("Upload File/URL ERROR", 'lw', 'r') + " " + make_colors("or", 'lc') + " " + make_colors("Invalid URL !", 'lw', 'm') + " " + make_colors("[" + import_task.get("code") + "]", 'b', 'y'))
+                return False                    
+            elif import_task:
                 if not import_task.get('status') == 'finished':
                     self.bar.update(n, task = task, subtask = subtask)
                     n += 1
@@ -272,12 +276,20 @@ class PyConv(object):
             subtask = make_colors(convert_task.get('result').get('files')[0].get('filename'), 'b', 'lg') + " "
         n = 1
         if convert_task.get('status') == 'error':
+            self.bar.update(100, task = task, subtask = make_colors("[" + convert_task.get(
+                "code") + "]", 'lw', 'r') + " ")
             print(make_colors("Import File ERROR", 'lw', 'r') + " " + make_colors("or", 'lc') + " " + make_colors("Invalid URL !", 'lw', 'm') + " " + make_colors("[" + convert_task.get(
                 "code") + "]", 'b', 'y'))
             return False
         while 1:
             debug(convert_task = convert_task )
-            if import_task.get('result'):
+            if convert_task.get('status') == 'error':
+                self.bar.update(100, task = task, subtask = make_colors("[" + convert_task.get(
+                    "code") + "]", 'lw', 'r') + " ")
+                print(make_colors("Import File ERROR", 'lw', 'r') + " " + make_colors("or", 'lc') + " " + make_colors("Invalid URL !", 'lw', 'm') + " " + make_colors("[" + convert_task.get(
+                    "code") + "]", 'b', 'y'))
+                return False            
+            elif import_task.get('result'):
                 subtask = make_colors(import_task.get('result').get('files')[0].get('filename'), 'b', 'lg') + " "
             elif convert_task.get('result'):
                 subtask = make_colors(convert_task.get('result').get('files')[0].get('filename'), 'b', 'lg') + " "
@@ -310,7 +322,11 @@ class PyConv(object):
             return False        
         while 1:
             debug(export_task = export_task)
-            if export_task:
+            if export_task.get('status') == 'error':
+                self.bar.update(100, task = task, subtask = make_colors("[" + export_task.get("code") + "]", 'lw', 'r') + " ")
+                print(make_colors("Export Task ERROR", 'lw', 'r') + " " + make_colors("[" + export_task.get("code") + "]", 'b', 'y'))
+                return False                    
+            elif export_task:
                 if not export_task.get('status') == 'finished':
                     self.bar.update(n, task = task, subtask = subtask)
                     n += 1
