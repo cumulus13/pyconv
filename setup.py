@@ -89,8 +89,6 @@ entry_points = {
     }
 
 if sys.version_info.major == 3:
-    requirements.append('fake_headers')
-    requirements.append('rich')
     entry_points = {
     "console_scripts": [
         "{}3 = {}.{}:usage".format(NAME, NAME, NAME)
