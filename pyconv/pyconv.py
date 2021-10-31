@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import cloudconvert
 import sys
 from pprint import pprint
@@ -16,8 +18,8 @@ except:
     def pause(*args, **kwargs):
         raw_input("Enter to continue")
 
-class PyCon(object):
-    configname = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'pycon.ini')
+class PyConv(object):
+    configname = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'pyconv.ini')
     config = configset(configname)
     prefix = "{variables.task} >> {variables.subtask}"
     variables = {'task': '', 'subtask': ''}
@@ -31,7 +33,7 @@ class PyCon(object):
         sys.exit()
 
     def __init__(self, api = None, url = None, configname = None):
-        super(PyCon, self)
+        super(PyConv, self)
         self.api = api or self.api
         url = url or self.url
         if configname:
@@ -362,7 +364,7 @@ class PyCon(object):
         #res = cloudconvert.download(filename=file['filename'], url = file['url'])
         #pprint(res)
 def usage():
-    return PyCon.usage()
+    return PyConv.usage()
 
 if __name__ == "__main__":
-    PyCon.usage()
+    PyConv.usage()
